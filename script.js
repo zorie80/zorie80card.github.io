@@ -5,29 +5,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
     addToCartButtons.forEach((button, index) => {
         button.addEventListener("click", function () {
-            const item = document.createElement("li");
-            item.textContent = "Item " + (index + 1);
+            const itemText = "Item " + (index + 1);
             
-            // Adicione um bot„o de remoÁ„o ao item do carrinho
+            // Adicione um bot√£o de remo√ß√£o ao item do carrinho
+            const item = document.createElement("li");
+            item.textContent = itemText;
+            
             const removeButton = document.createElement("button");
             removeButton.textContent = "Remover";
             removeButton.addEventListener("click", function () {
                 item.remove();
             });
-            item.appendChild(removeButton);
             
+            item.appendChild(removeButton);
             cartItemsList.appendChild(item);
         });
     });
 
     checkoutButton.addEventListener("click", function () {
-        const cartItems = cartItemsList.textContent.trim();
+        const cartItems = Array.from(cartItemsList.children)
+            .map(item => item.textContent.split("Remover")[0]) // Remove o texto do bot√£o "Remover"
+            .join("%0A"); // Adicione uma quebra de linha entre os itens
+            
         if (cartItems !== "") {
-            const whatsappMessage = "Meu pedido:\n" + cartItems;
-            const whatsappLink = "https://wa.me/5599984020352/?text=" + encodeURIComponent(whatsappMessage);
+            const whatsappMessage = "Meu pedido:%0A" + cartItems; // Adicione uma quebra de linha no in√≠cio
+            const whatsappLink = "https://wa.me/seunumerodetelefone/?text=" + encodeURIComponent(whatsappMessage);
             window.location.href = whatsappLink;
         } else {
-            alert("Seu carrinho est· vazio!");
+            alert("Seu carrinho est√° vazio!");
         }
     });
 });
