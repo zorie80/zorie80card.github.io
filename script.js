@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
         if (cartItems !== "") {
             const whatsappMessage = "Meu pedido:%0A" + cartItems; // Adicione uma quebra de linha no início
-            const whatsappLink = "https://wa.me/seunumerodetelefone/?text=" + encodeURIComponent(whatsappMessage);
+            const whatsappLink = "https://wa.me/5599984020352/?text=" + encodeURIComponent(whatsappMessage);
             window.location.href = whatsappLink;
         } else {
             alert("Seu carrinho está vazio!");
